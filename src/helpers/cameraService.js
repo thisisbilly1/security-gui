@@ -7,7 +7,6 @@ export async function get(path) {
     method: 'GET',
     headers: new Headers({
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': '*',
       Authorization: authService.accessToken,
     }),
   })
@@ -21,10 +20,8 @@ export async function post(path, body) {
   const rootStore = useRootStore()
   const resp = await fetch(`${rootStore.cameraServer}${path}`, {
     method: 'POST',
-    mode: "cors",
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify(body),
   })
