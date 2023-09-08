@@ -1,7 +1,9 @@
 import { authService } from "./authService"
+import { useRootStore } from "@/stores/index"
 
 export async function get(path) {
-  const resp = await fetch(`${import.meta.env.VITE_APP_API}${path}`, {
+  const rootStore = useRootStore()
+  const resp = await fetch(`${rootStore.cameraServer}${path}`, {
     method: 'GET',
     headers: new Headers({
       "Content-Type": "application/json",
@@ -15,7 +17,8 @@ export async function get(path) {
 }
 
 export async function post(path, body) {
-  const resp = await fetch(`${import.meta.env.VITE_APP_API}${path}`, {
+  const rootStore = useRootStore()
+  const resp = await fetch(`${rootStore.cameraServer}${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

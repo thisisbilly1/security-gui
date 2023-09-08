@@ -44,6 +44,16 @@
               color="primary"
             ></v-progress-circular>
           </v-overlay>
+
+          <v-text-field
+            class="camera-server-input"
+            outlined
+            label="Camera Server"
+            v-model="cameraServer"
+            prepend-icon="mdi-server"
+            type="text"
+            :disabled="loading"
+          />
         </div>
         <CameraSelection v-else />
       </v-responsive>
@@ -67,7 +77,7 @@ export default {
     const loading = ref(false);
 
     const store = useRootStore();
-    const { isAuthenticated, invalidCredentials } = storeToRefs(store);
+    const { isAuthenticated, invalidCredentials, cameraServer } = storeToRefs(store);
 
     async function login() {
       loading.value = true;
@@ -86,12 +96,18 @@ export default {
       loading,
       isAuthenticated,
       invalidCredentials,
+      cameraServer,
     };
   },
 };
 </script>
 
 <style scoped lang="scss">
+.camera-server-input {
+  margin: auto;
+  width: 300px;
+  margin-top: 30px;
+}
 .connectingOverlay {
   display: flex;
   justify-content: center;
