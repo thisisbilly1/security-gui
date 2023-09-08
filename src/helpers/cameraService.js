@@ -5,6 +5,8 @@ export async function get(path) {
   const rootStore = useRootStore()
   const resp = await fetch(`${rootStore.cameraServer}${path}`, {
     method: 'GET',
+    mode: "cors",
+    credentials: "include",
     headers: new Headers({
       "Content-Type": "application/json",
       Authorization: authService.accessToken,
@@ -20,6 +22,8 @@ export async function post(path, body) {
   const rootStore = useRootStore()
   const resp = await fetch(`${rootStore.cameraServer}${path}`, {
     method: 'POST',
+    mode: "cors",
+    credentials: "include",
     headers: {
       'Content-Type': 'application/json',
     },
