@@ -57,7 +57,7 @@ export default {
     const video = ref(null);
     const { selectedCamera } = toRefs(props);
 
-    const videoSrc = `${import.meta.env.VITE_APP_API}/video?cameraId=${selectedCamera.value.id}&token=${authService.accessToken}`;
+    const videoSrc = `/video?cameraId=${selectedCamera.value.id}&token=${authService.accessToken}`;
     
     function toggleFullScreen() {
       video.value.$el.requestFullscreen();

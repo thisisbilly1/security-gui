@@ -69,7 +69,7 @@ export default {
       const resp = await get('/cameras');
       cameras.value = resp.map(cam => ({
         ...cam,
-        thumbnail: `${import.meta.env.VITE_APP_API}/thumbnail?cameraId=${cam.id}&token=${authService.accessToken}`,
+        thumbnail: `/thumbnail?cameraId=${cam.id}&token=${authService.accessToken}`,
       }));
       loading.value = false;
     });

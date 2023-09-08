@@ -5,7 +5,6 @@ export const useRootStore = defineStore({
   id: 'root',
   state: () => ({
     authService,
-    cameraServer: import.meta.env.VITE_APP_API,
   }),
   getters: {
     isAuthenticated() {
