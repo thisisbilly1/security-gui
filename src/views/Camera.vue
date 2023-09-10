@@ -11,7 +11,6 @@
         <v-img
           ref="video"
           :src="videoSrc"
-          :width="400"
           aspect-ratio="16/9"
         >
           <template v-slot:placeholder>
