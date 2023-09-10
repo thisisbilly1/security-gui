@@ -33,7 +33,7 @@
       </v-card-text>
     </v-card>
     <v-divider class="mt-2"></v-divider>
-    <v-btn @click="toggleNightMode">toggle night mode</v-btn>
+    <v-btn @click="toggleNightMode" color="primary">toggle night mode</v-btn>
     <h2>Recent activities</h2>
     <!-- <RecentActivities :selectedCamera="selectedCamera"/> -->
     <v-card></v-card>
