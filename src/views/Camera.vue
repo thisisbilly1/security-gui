@@ -33,6 +33,7 @@
       </v-card-text>
     </v-card>
     <v-divider class="mt-2"></v-divider>
+    <v-btn @click="toggleNightMode">toggle night mode</v-btn>
     <h2>Recent activities</h2>
     <!-- <RecentActivities :selectedCamera="selectedCamera"/> -->
     <v-card></v-card>
@@ -43,6 +44,7 @@
 import { toRefs, ref, onMounted } from "vue";
 import RecentActivities from "./RecentActivities.vue";
 import { authService } from "@/helpers/authService";
+import { post } from "@/helpers/cameraService";
 
 export default {
   name: "Camera",
@@ -63,11 +65,16 @@ export default {
       video.value.$el.requestFullscreen();
     }
 
+    function toggleNightMode() {
+      post(`/nightMode?cameraId=${selectedCamera.value.id}/`)
+    }
+
     return {
       video,
       videoSrc,
       toggleFullScreen,
       selectedCamera,
+      toggleNightMode,
     };
   },
 };
