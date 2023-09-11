@@ -12,16 +12,12 @@
         <ExpandableImage :src="activity.image" />
       </v-card-text>
     </v-card>
-    <v-btn v-if="hasMore" color="primary" @click="loadMore">
-      Load More
-    </v-btn>
   </div>
 </template>
 
 <script>
-import { toRefs, onMounted, computed, ref } from "vue";
-import { useRootStore } from "@/stores";
-import { storeToRefs } from "pinia";
+import { toRefs, onMounted, shallowRef } from "vue";
+import { get } from "@/helpers/cameraService";
 import ExpandableImage from '../components/ExpandableImage.vue';
 
 export default {
@@ -34,37 +30,20 @@ export default {
     },
   },
   setup(props) {
-    const currentPage = ref(0);
+    const activities = shallowRef([]);
     const { selectedCamera } = toRefs(props);
-    const store = useRootStore();
-    const { activitiesObj } = storeToRefs(store);
 
-    onMounted(() => {
-      store.getActivities(selectedCamera.value.id);
-    });
-
-    const activities = computed(() => {
-      if (!activitiesObj?.value) return [];
-      return activitiesObj.value.activities.map(activity => ({
-        ...activity,
-        time: new Date(activity.time).toLocaleString(),
+    onMounted(async () => {
+      const resp = await get(`/activities?cameraId=${selectedCamera.value.id}`);
+      activities.value = resp.map(activity => ({
+        time: new Date(activity).toLocaleString(),
+        image: `/image?cameraId=${selectedCamera.value.id}&activityId=${activity}`,
       }));
     });
 
-    const hasMore = computed(() => {
-      if (!activitiesObj?.value) return false;
-      return activitiesObj.value.hasMore;
-    });
-
-    function loadMore() {
-      currentPage.value += 1;
-      store.getActivities(selectedCamera.value.id, currentPage.value);
-    }
-
+    
     return {
       activities,
-      hasMore,
-      loadMore,
     };
   },
 }
