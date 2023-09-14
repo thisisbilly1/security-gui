@@ -25,7 +25,7 @@
     </v-card>
     <v-divider class="mt-2"></v-divider>
     <v-card class="video-controls">
-      <v-btn @click="toggleNightMode" color="primary">toggle night mode</v-btn>
+      <!-- <v-btn @click="toggleNightMode" color="primary">toggle night mode</v-btn> -->
       <v-btn @click="flipHorizontally" color="primary">flip horizontally</v-btn>
       <v-btn @click="flipVertically" color="primary">flip vertically</v-btn>
     </v-card>
