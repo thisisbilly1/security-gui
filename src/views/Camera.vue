@@ -61,15 +61,23 @@ export default {
     }
 
     function toggleNightMode() {
-      post(`/nightMode?cameraId=${selectedCamera.value.id}/`);
+      post('/nightMode', {
+        cameraId: selectedCamera.value.id,
+      });
     }
 
     function flipHorizontally() {
-      post(`/flipHorizontal?cameraId=${selectedCamera.value.id}/`);
+      // post(`/flipHorizontal?cameraId=${selectedCamera.value.id}/`);
+      post('/flipHorizontal', {
+        cameraId: selectedCamera.value.id,
+      });
     }
 
     function flipVertically() {
-      post(`/flipVertical?cameraId=${selectedCamera.value.id}/`);
+      // post(`/flipVertical?cameraId=${selectedCamera.value.id}/`);
+      post('/flipVertical', {
+        cameraId: selectedCamera.value.id,
+      });
     }
 
     return {
