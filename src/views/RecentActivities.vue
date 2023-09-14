@@ -35,10 +35,10 @@ export default {
     const { selectedCamera } = toRefs(props);
 
     onMounted(async () => {
-      const resp = await get(`/activities?cameraId=${selectedCamera.value.id}&token=${authService.accessToken}`);
+      const resp = await get(`/activities?cameraId=${selectedCamera.value.id}`);
       activities.value = resp.activities.map(activity => ({
         time: new Date(Number(activity.replace('.jpg', ''))).toLocaleString(),
-        image: `/image?cameraId=${selectedCamera.value.id}&activityId=${activity}`,
+        image: `/image?cameraId=${selectedCamera.value.id}&activityId=${activity}&token=${authService.accessToken}`,
       }));
     });
 
