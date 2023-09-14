@@ -8,17 +8,9 @@
         <v-icon @click="$emit('close')">mdi-close</v-icon>
       </v-card-title>
       <v-card-text class="video-container">
-        <v-img
-          ref="video"
-          :src="videoSrc"
-          aspect-ratio="16/9"
-        >
+        <v-img ref="video" :src="videoSrc" aspect-ratio="16/9">
           <template v-slot:placeholder>
-            <v-row
-              class="fill-height ma-0"
-              align="center"
-              justify="center"
-            >
+            <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular
                 indeterminate
                 color="grey lighten-5"
@@ -32,9 +24,13 @@
       </v-card-text>
     </v-card>
     <v-divider class="mt-2"></v-divider>
-    <v-btn @click="toggleNightMode" color="primary">toggle night mode</v-btn>
+    <v-card class="video-controls">
+      <v-btn @click="toggleNightMode" color="primary">toggle night mode</v-btn>
+      <v-btn @click="flipHorizontally" color="primary">flip horizontally</v-btn>
+      <v-btn @click="flipVertically" color="primary">flip vertically</v-btn>
+    </v-card>
     <h2>Recent activities</h2>
-    <RecentActivities :selectedCamera="selectedCamera"/>
+    <RecentActivities :selectedCamera="selectedCamera" />
     <v-card></v-card>
   </div>
 </template>
@@ -59,13 +55,21 @@ export default {
     const { selectedCamera } = toRefs(props);
 
     const videoSrc = `/video?cameraId=${selectedCamera.value.id}&token=${authService.accessToken}`;
-    
+
     function toggleFullScreen() {
       video.value.$el.requestFullscreen();
     }
 
     function toggleNightMode() {
-      post(`/nightMode?cameraId=${selectedCamera.value.id}/`)
+      post(`/nightMode?cameraId=${selectedCamera.value.id}/`);
+    }
+
+    function flipHorizontally() {
+      post(`/flipHorizontal?cameraId=${selectedCamera.value.id}/`);
+    }
+
+    function flipVertically() {
+      post(`/flipVertical?cameraId=${selectedCamera.value.id}/`);
     }
 
     return {
@@ -74,12 +78,19 @@ export default {
       toggleFullScreen,
       selectedCamera,
       toggleNightMode,
+      flipHorizontally,
+      flipVertically,
     };
   },
 };
 </script>
 
 <style scoped lang="scss">
+.video-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .video-container {
   position: relative;
 
