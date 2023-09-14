@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { authService } from "@/helpers/authService";
 import { toRefs, onMounted, shallowRef } from "vue";
 import { get } from "@/helpers/cameraService";
 import ExpandableImage from '../components/ExpandableImage.vue';
@@ -34,7 +35,7 @@ export default {
     const { selectedCamera } = toRefs(props);
 
     onMounted(async () => {
-      const resp = await get(`/activities?cameraId=${selectedCamera.value.id}`);
+      const resp = await get(`/activities?cameraId=${selectedCamera.value.id}&token=${authService.accessToken}`);
       activities.value = resp.activities.map(activity => ({
         time: new Date(activity).toLocaleString(),
         image: `/image?cameraId=${selectedCamera.value.id}&activityId=${activity}`,
