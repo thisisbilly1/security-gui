@@ -19,6 +19,7 @@ export async function post(path, body) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: authService.accessToken,
     },
     body: JSON.stringify(body),
   })
