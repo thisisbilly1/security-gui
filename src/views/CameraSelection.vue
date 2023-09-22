@@ -53,7 +53,7 @@
 <script>
 import { ref, onMounted, shallowRef } from "vue";
 import Camera from "./Camera.vue";
-import { get } from '@/helpers/cameraService';
+import { get, post } from '@/helpers/cameraService';
 import { authService } from "@/helpers/authService";
 
 export default {
