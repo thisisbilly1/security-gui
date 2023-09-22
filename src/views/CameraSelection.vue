@@ -33,6 +33,7 @@
         </v-card-text>
       </v-card>
     </v-row>
+    <v-btn @click="reboot" color="warning">reboot</v-btn>
     <v-overlay v-model="loading" absolute class="connectingOverlay">
       <v-progress-circular
         indeterminate
@@ -74,10 +75,15 @@ export default {
       loading.value = false;
     });
 
+    function reboot() {
+      post('/reboot');
+    }
+
     return {
       loading,
       cameras,
       selectedCamera,
+      reboot,
     };
   },
 };
